@@ -17,7 +17,22 @@
 *
 */
 
-var rockPaperScissors = function (
-) {
+var rockPaperScissors = function(n){
   // TODO: your solution here
+  var options = ["rock","paper","scissors"];
+  var solution = [];
+  var temp = [];
+  backtrack(n,temp,solution,options);
+  return solution;
 };
+
+var backtrack = function(n,temp,solution,options){
+	if( n === 0) solution.push(temp.slice());
+	else{
+		for(var i = 0; i<options.length;i++){
+			temp.push(options[i]);
+			backtrack(n-1,temp,solution,options);
+			temp.splice(-1,1);
+		}
+	}
+}
