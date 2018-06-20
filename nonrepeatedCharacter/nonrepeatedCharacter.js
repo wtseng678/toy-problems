@@ -7,5 +7,20 @@
  */
 
 var firstNonRepeatedCharacter = function(string) {
-  // TODO: your solution here
+  var rep = [];
+  for (var i = 0; i < string.length; i++) {
+  	var repeated = false;
+  	for (var j = i + 1; j < string.length; j++) {
+  		if (string[i] === string[j]) {
+  			repeated = true;
+  			rep.push(string[i]);
+  		}
+  	}
+  	if (repeated === false && !rep.includes(string[i])) {
+  		return string[i];
+  	}
+  }
 };
+
+//console.log(firstNonRepeatedCharacter('ABA'));
+//console.log(firstNonRepeatedCharacter('AACBDB'));
