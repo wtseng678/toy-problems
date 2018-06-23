@@ -32,7 +32,30 @@
 
 // Feel free to add helper functions if needed.
 
-
+// best time complexity is O(n), worst is O(n^2)
 var bubbleSort = function(array) {
-  // Your code here.
+  var n = array.length - 1;
+  var sorted = function(array) { // checks if function is sorted
+	for (var i = 0; i < n; i++) {
+		if (array[i] > array[i + 1]) {
+			return false;
+		}
+	}
+	return true;
+  };
+  while (!sorted(array)) { // will not pass through the list if already sorted
+    for (var i = 0; i < n; i++) {
+  	  if (array[i] > array[i + 1]) {
+  	   	var temp = array[i + 1];
+  		array[i + 1] = array[i];
+  		array[i] = temp;
+  	  }
+    }
+    n--; // iterates on a smaller loop each time to avoid iterating over already sorted elements
+  }
+  return array;
 };
+
+//console.log(bubbleSort([2, 1, 3]));
+//console.log(bubbleSort([3, 2, 1]));
+//console.log(bubbleSort([5, 4, 3, 2, 1]));
