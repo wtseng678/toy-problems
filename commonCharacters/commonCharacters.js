@@ -12,6 +12,20 @@
 
 
 
-var commonCharacters = function(string1, string2) {
+var commonCharacters = function() {
   // TODO: Your code here!
+  var str = "";
+  var arg = [].slice.call(arguments);
+  for (var i = 0; i < arg[0].length; i++) {
+  	var one = true;
+  	for (var j = 1; j < arg.length; j++) {
+  		if (!arg[j].includes(arg[0][i]) || str.includes(arg[0][i])) {
+  			one = false;
+  		}
+  	}
+  	if (one) {
+  		str += arg[0][i];
+  	}
+  }
+  return str;
 };
