@@ -25,25 +25,30 @@
   *   // [2, 3]
   *
   */
-
 /*
  * Basic tree that stores a value.
  */
-
 var Tree = function(value) {
   this.value = value;
   this.children = [];
 };
-
-Tree.prototype.DFSelect = function(filter) {
+Tree.prototype.DFSelect = function(filter, nodeDepth) {
+  var sol = [];
+  function recurse(node, depth) {
+    var depth = depth || 0;
+    if (filter(node.value, depth)) {
+      sol.push(node.value);
+    }
+    for (var i = 0; i < node.children.length; i++) {
+      recurse(node.children[i], depth + 1);
+    }
+  }
+  recurse(this);
+  return sol;
 };
-
-
-
 /**
  * You shouldn't need to change anything below here, but feel free to look.
   */
-
 /**
   * add an immediate child
   * (wrap values in Tree nodes if they're not already)
@@ -52,7 +57,6 @@ Tree.prototype.addChild = function(child) {
   if (!child || !(child instanceof Tree)) {
     child = new Tree(child);
   }
-
   if (!this.isDescendant(child)) {
     this.children.push(child);
   } else {
@@ -61,7 +65,6 @@ Tree.prototype.addChild = function(child) {
   // return the new child node for convenience
   return child;
 };
-
 /**
   * check to see if the provided tree is already a child of this
   * tree __or any of its sub trees__
@@ -80,7 +83,6 @@ Tree.prototype.isDescendant = function(child) {
     return false;
   }
 };
-
 /**
   * remove an immediate child
   */
@@ -93,3 +95,19 @@ Tree.prototype.removeChild = function(child) {
     throw new Error('That node is not an immediate child of this tree');
   }
 };
+
+var root1 = new Tree(1);
+var branch2 = root1.addChild(2);
+var branch3 = root1.addChild(3);
+var leaf4 = branch2.addChild(4);
+var leaf5 = branch2.addChild(5);
+var leaf6 = branch3.addChild(6);
+var leaf7 = branch3.addChild(7);
+
+
+
+//console.log(root1.DFSelect(function (value, depth) { return value % 2; }));
+// [1, 5, 3, 7]
+
+//console.log(root1.DFSelect(function (value, depth) { return depth === 1; }));
+// [2, 3]
