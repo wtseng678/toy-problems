@@ -26,7 +26,10 @@ var powerSet = function(str) {
 				subset += str[j];
 			}
 		}
-		result.push(subset.split("").sort().join(""));
+		var sub = subset.split("").sort().join("");
+		if (!result.includes(sub)) {
+			result.push(sub);
+		}
 	}
 	return result.sort();	
 };
