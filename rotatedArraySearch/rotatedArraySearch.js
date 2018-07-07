@@ -16,6 +16,29 @@
  */
 
 var rotatedArraySearch = function (rotated, target) {
-  // Your code here:
+  var min = 0;
+  var max = rotated.length-1;
+  while (min < max) {
+    var mid = Math.floor((min + max) / 2);
+    if (target === rotated[mid]) {
+      return mid;
+    }
+    if (rotated[mid] <= rotated[max]) {
+      if(target < rotated[mid] || target > rotated[max]) {
+         max = mid - 1;
+       } else {
+         min = mid + 1; 
+       }      
+    } else if (rotated[mid] >= rotated[min]) {
+       if(target > rotated[mid] || target < rotated[min]) {
+         min = mid + 1;
+       } else {
+         max = mid - 1; 
+       }      
+    }
+  }
+  return null;
 };
 
+console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 2));
+console.log(rotatedArraySearch([4, 5, 6, 0, 1, 2, 3], 100));
