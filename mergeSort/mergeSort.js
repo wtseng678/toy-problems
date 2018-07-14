@@ -95,8 +95,29 @@
  *
  */
 
-
+// time complexity O(nlogn)
 
 var mergeSort = function(array) {
-  // Your code here.
+  return array.length === 1 ?  array : merge(mergeSort(array.slice(0, Math.floor(array.length / 2))), mergeSort(array.slice(Math.floor(array.length / 2))));
 };
+
+var merge = function(left, right) {
+  var res = [];
+  var lin = 0;
+  var rin = 0;
+
+  while (lin < left.length && rin < right.length) {
+    if (left[lin] < right[rin]) {
+      res.push(left[lin]);
+      lin++;
+    } else {
+      res.push(right[rin]);
+      rin++;
+    }
+  }
+  return res.concat(left.slice(lin)).concat(right.slice(rin));
+};
+
+console.log(mergeSort([4, 7, 5, 6, 8, 3, 9, 1, 2]));
+console.log(mergeSort([9, 8, 7, 6, 5, 4, 3, 2, 1]));
+console.log(mergeSort([1, 2, 3, 4, 5, 6, 7, 8, 9]));
