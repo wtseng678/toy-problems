@@ -33,6 +33,14 @@
 
 var shuffleDeck = function(deck) {
   // Your code here
+  var suits = [ '♥', '♣', '♠', '♦' ];
+  var values = [ 'A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K' ];
+  for(var i = 0; i < deck.length; i++) {
+      var rand = Math.floor(Math.random() * 52) + 1;
+      var card = deck[i];
+      deck[i] = deck[rand];
+      deck[rand] = card;
+  }
 };
 
 // Ordered deck generator provided for your testing convenience
@@ -50,3 +58,9 @@ var orderedDeck = function() {
 
   return deck;
 };
+
+var deck = orderedDeck();
+console.log(deck);
+shuffleDeck(deck);
+console.log(deck);
+console.log(deck.length); 
