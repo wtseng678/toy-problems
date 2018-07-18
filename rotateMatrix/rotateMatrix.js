@@ -43,7 +43,49 @@
  *  - Make your function accept a parameter for the direction of rotation (1 = clockwise, -1 = counterclockwise)
  */
 
-var rotateMatrix = function(matrix
-) {
+var rotateMatrix = function(matrix, direction) {
   // Your code here.
+  if (matrix.length && matrix[0] !== undefined) {  
+    var newMatrix = [];
+    if (direction === 1) {
+        for (var i = 0; i < matrix[0].length; i++) {
+          var row = [];
+          for (var j = matrix.length - 1; j >= 0; j--) {
+            row.push(matrix[j][i]);
+          }
+          newMatrix.push(row);
+        }
+      } else {
+        for (var i = matrix[0].length - 1; i >= 0; i--) {
+          var row = [];
+          for (var j = 0; j < matrix.length; j++) {
+            row.push(matrix[j][i]);
+          }
+          newMatrix.push(row);
+        }        
+      }
+      return newMatrix;
+  } else {
+    return matrix;
+  }
 };
+
+// clockwise: need to read from (0, 3) -> (0, 0) then (1, 3) to (1, 0) etc.
+// counterclockwise: need to read from (3, 0) -> (3, 3) then (2, 0) -> (2, 3) etc.
+// var matrix = [
+// [1,2,3,4],
+// [5,6,7,8],
+// [9,'A','B','C'],
+// ['D','E','F','G']
+// ];
+// console.log(matrix);
+// // console.log(matrix[0][0]); // 1
+// // console.log(matrix[3][2]); // 'F'
+
+// var rotatedMatrix = rotateMatrix(matrix, 1); // Rotate 90 degrees clockwise
+// // rotatedMatrix is:
+// console.log(rotatedMatrix);
+// console.log(rotatedMatrix[0][0]); // 'D'
+// console.log(rotatedMatrix[3][2]); // 8
+// var rotatedMatrix2 = rotateMatrix(matrix, -1);
+// console.log(rotatedMatrix2);
